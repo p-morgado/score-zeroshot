@@ -83,7 +83,52 @@ Attributes | 61.7 / 71.6 / 70.9 | 48.5 / 58.4 / 59.5 | 0.01 | 1.0
 Hierarchy  | 60.2 / 73.1 / 69.6 | 24.2 / 31.8 / 31.3 | 0.05 | 5.0
 Word2Vec   | 61.4 / 73.6 / 71.9 | 26.0 / 31.5 / 30.1 | 0.01 | 1.0
 
+
+
+
+### (↓ Reproduced results in Caltech-UCSD Birds-200-2011 dataset) 
+##### 
+Semantics |Source Classes | Target Classes | Semantic Coeff | Codeword Coeff
+:---:|:---:|:---:|:---:|:---:
+Attributes | 62.2 / 73.4 / 69.6 | 46.7 / 58.5 / 56.3 | 0.01 | 1.0
+Hierarchy  | 60.6 / 71.9 / 68.1 | 24.3 / 25.0 / 27.7 | 0.05 | 5.0
+Word2Vec   | 60.7 / 73.4 / 73.9 | 26.9 / 30.5 / 29.2 | 0.01 | 1.0
+
+### (↓ Difference between reproduced results (R) and paper ones (P): (R) - (P)) 
+#####
+Semantics |Source Classes | Target Classes 
+:---:|:---:|:---:
+Attributes | 0.5 / 1.8 / -1.3 | -1.8 / 0.1 / -3.2 
+Hierarchy  | 0.4 / -1.2 / -1.5 | 0.1 / **-6.8** / **-3.6** 
+Word2Vec   | -0.7 / -0.2 / 2.0 | **0.9** / -1.0 / -0.9 
+
 Key: AlexNet / GoogLeNet / VGG19
+
+### Commands to train each model
+#####
+Model |**Attributes**
+:---:|:---:
+AlexNet | python score_train.py A_Attr CUB Attributes AlexNet -g 0.01 -c 1 --gpu 0 --iters 1000 --init_lr 0.0005
+GoogLeNet | python score_train.py G_Attr CUB Attributes GoogLeNet -g 0.01 -c 1 --gpu 1 --iters 1000 --init_lr 0.0005
+VGG19 | python score_train.py V_Attr CUB Attributes VGG19 -g 0.01 -c 1 --gpu 0 --iters 1000 --init_lr 0.0005 --batch_size 30 
+#####
+Model |**Hierarchy**
+:---:|:---:
+AlexNet | python score_train.py A_Hier CUB Hierarchy AlexNet -g 0.05 -c 5 --gpu 1 --iters 1000 --init_lr 0.0005
+GoogLeNet | python score_train.py G_Hier CUB Hierarchy GoogLeNet -g 0.05 -c 5 --gpu 1 --iters 1000 --init_lr 0.001
+VGG19 | python score_train.py V_Hier CUB Hierarchy VGG19 -g 0.05 -c 5 --gpu 0 --iters 1000 --init_lr 0.0005 --batch_size 30  
+#####
+Model |**Word2Vec**
+:---:|:---:
+AlexNet | python score_train.py A_Word CUB Word2Vec AlexNet -g 0.01 -c 1 --gpu 1 --iters 1000 --init_lr 0.0005 
+GoogLeNet | python score_train.py G_Word CUB Word2Vec GoogLeNet -g 0.01 -c 1 --gpu 1 --iters 1000 --init_lr 0.001 
+VGG19 | python score_train.py V_Word CUB Word2Vec VGG19 -g 0.01 -c 1 --gpu 0 --iters 2000 --init_lr 0.0005 --batch_size 30
+
+### System environments
+* Ubuntu 16.04
+* GTX 1080 Ti x2
+* CUDA 8.0
+* cuDNN v7
 
 ### Trained models
 

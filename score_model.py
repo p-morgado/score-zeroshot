@@ -319,7 +319,7 @@ class SCoRe(object):
     def _eval_proto(self, xObj, xLb):
         ns = self.netspec
         name = 'SCoRe/eval/obj/accuracy'
-        ns[name] = L.Accuracy(*[xObj, xLb], name=name)
+        ns[name] = L.Accuracy(*[xObj, xLb], name=name, include={'phase': caffe.TEST})
 
     def generate_train_proto(self, model_fn, fts_lmdb, sem_lmdb, batch_size):
         ns = self._new_model()
